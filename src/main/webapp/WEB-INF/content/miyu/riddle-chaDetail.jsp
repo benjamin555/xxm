@@ -189,6 +189,8 @@ $(function(){
 		var perScore = $("#perScore").val();
 		$("#deduction").val(perScore);
 		$("#pass").val(true);
+		
+		$("#rdForm").unbind("submit") 
 		$("#rdForm").submit();
 	});
 	
