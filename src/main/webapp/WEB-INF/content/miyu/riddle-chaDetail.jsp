@@ -145,6 +145,7 @@ $(function(){
 				}
 				span.append(msgModalHtml);
 				$("#helpCount").val(helpCount+1)
+				 disabledOtherTipBtn(this);
 			}else{
 				if(isLucky()){
 					 span = span.text("免费再送你半个字吧："+cha);
@@ -280,6 +281,10 @@ function addDeduction(d){
 
 function disabledAllTipBtn(){
 	$(".tip-group>button").attr("disabled","disabled");
+}
+function disabledOtherTipBtn(excep){
+	$(".tip-group>button").attr("disabled","disabled");
+	$(excep).attr("disabled","");
 }
 
 
