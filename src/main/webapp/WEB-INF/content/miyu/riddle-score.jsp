@@ -80,8 +80,6 @@ WeixinApi.ready(function(Api) {
         },
         // 分享成功
         confirm : function(resp) {
-            // 分享成功了，我们是不是可以做一些分享统计呢？
-            alert("分享成功" );
         }
     };
 
