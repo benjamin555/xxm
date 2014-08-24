@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache name="hibernate-local" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
-	updateCheck="false" maxBytesLocalHeap="100m"
-	maxBytesLocalDisk="500m">
+	updateCheck="false" maxBytesLocalHeap="50m"
+	maxBytesLocalDisk="400m">
 	<diskStore path="java.io.tmpdir/hibernate/xxm-web" />
 
 	<!-- DefaultCache setting. -->
