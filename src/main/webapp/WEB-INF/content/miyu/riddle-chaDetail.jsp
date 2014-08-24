@@ -84,6 +84,8 @@
 				<button type="button" id="pengmeng" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;蓬蒙&nbsp;&nbsp;&nbsp;</button>
 				<button type="button" id="weixin" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;月亮&nbsp;&nbsp;&nbsp;</button>
 			</div>
+			
+			<%@include file="/common/footer.jsp"%>
 		</div>
 	</div>
 </body>

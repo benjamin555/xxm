@@ -33,6 +33,7 @@
 				</div>
 				<button type="submit" class="btn btn-default">提交</button>
 			</form>
+			<%@include file="/common/footer.jsp"%>
 		</div>
 	</div>
 </body>

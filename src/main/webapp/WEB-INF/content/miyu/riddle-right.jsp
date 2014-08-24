@@ -45,7 +45,7 @@
 			<a href="<%=basePath%>miyu/riddle!input.action"
 				class="btn btn-default " role="button">自己建一条</a>
 			</div>
-			
+			<%@include file="/common/footer.jsp"%>
 		</div>
 	</div>
 </body>

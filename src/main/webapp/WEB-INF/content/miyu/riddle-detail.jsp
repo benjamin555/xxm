@@ -74,6 +74,9 @@
 			<div class="btn-group">
 				<button type="button" id="changer" class="btn btn-primary ">嫦娥仙子</button>
 			</div>
+			
+			
+			<%@include file="/common/footer.jsp"%>
 		</div>
 	</div>
 </body>

@@ -48,6 +48,8 @@
 					role="button">重新开始挑战</a>
 			</div>
 			</br>
+			
+			<%@include file="/common/footer.jsp"%>
 		</div>
 	</div>
 </body>
