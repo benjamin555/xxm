@@ -87,7 +87,10 @@
 			
 			<%@include file="/common/footer.jsp"%>
 		</div>
+		
+		
 	</div>
+	
 </body>
 </html>
 <script type="text/javascript">

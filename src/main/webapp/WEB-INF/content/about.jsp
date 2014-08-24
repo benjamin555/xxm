@@ -37,6 +37,7 @@
 			对应用有什么建议可以联系下述email:
 			</br>
 			 <a href="mailto:a114807134@163.com"><strong>a114807134@163.com</strong></a>
+
 			 </br>
 			  </br>
 			 <a href="<%=basePath%>miyu/riddle!challenge.action" >返回首页</a>
