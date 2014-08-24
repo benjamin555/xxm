@@ -80,6 +80,17 @@ public class ConfigUtil {
 	public static String getString(String key) {
 		return properties.getProperty(key);
 	}
+	
+	/**
+	 * 得到字符串值属性
+	 * 
+	 * @param key
+	 *            键的名称
+	 * @return 字符串值
+	 */
+	public static int getInt(String key) {
+		return Integer.parseInt(properties.getProperty((key)));
+	}
 
 
 }

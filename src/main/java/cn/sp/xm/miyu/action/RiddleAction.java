@@ -48,7 +48,7 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 	/**
 	 * 最大挑战题目数
 	 */
-	private static final int MAX_QUESTION_NO = 10;
+	private static final int MAX_QUESTION_NO = ConfigUtil.getInt("MAX_QUESTION_NO");
 	/**
 	 * 满分
 	 */
