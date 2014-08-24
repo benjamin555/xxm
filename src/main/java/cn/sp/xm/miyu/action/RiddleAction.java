@@ -39,7 +39,7 @@ import cn.sp.xm.miyu.service.RiddleService;
 @Results({ @Result(name = "exception", location = "/common/error.jsp") 
 			,@Result(name="show",type="redirect",location="riddle!show.action",params={"id","${riddle.id}"})
 			,@Result(name="showRight",type="redirect",location="riddle!showRight.action",params={"id","${riddle.id}"})
-			,@Result(name="challenge-score",type="redirect",location="riddle!score.action",params={"score","${score}","comment","${comment}"})
+			,@Result(name="challenge-score",type="redirect",location="riddle!score.action",params={"score","${score}"})
 			,@Result(name="challenge",type="redirect",location="riddle!chaDetail.action",params={"id","${riddle.id}"})
 })
 public class RiddleAction extends CrudActionSupport<Riddle> {
@@ -112,7 +112,7 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 		
 	}
 	public String score()throws Exception{
-		
+		comment = parseComment(score);
 		return "score";
 	}
 	
@@ -150,7 +150,6 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 		
 		if (questionNo>MAX_QUESTION_NO) {
 			//结束挑战,给评语
-			comment = parseComment(score);
 			
 			this.setScore(score);
 			return "challenge-score";
