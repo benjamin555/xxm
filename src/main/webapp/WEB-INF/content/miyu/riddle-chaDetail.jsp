@@ -284,7 +284,7 @@ function disabledAllTipBtn(){
 }
 function disabledOtherTipBtn(excep){
 	$(".tip-group>button").attr("disabled","disabled");
-	$(excep).attr("disabled","");
+	$(excep).removeAttr("disabled");
 }
 
 
