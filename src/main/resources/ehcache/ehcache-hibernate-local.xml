@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache name="hibernate-local" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+	updateCheck="false" maxBytesLocalHeap="100m"
+	maxBytesLocalDisk="500m">
+	<diskStore path="java.io.tmpdir/hibernate/xxm-web" />
+
+	<!-- DefaultCache setting. -->
+	<defaultCache memoryStoreEvictionPolicy="LRU" eternal="false"
+		timeToIdleSeconds="1500" timeToLiveSeconds="300" overflowToDisk="true"
+		diskPersistent="true" />
+		
+		
+	<!-- 查询缓存的配置，占百分之30的缓存 -->
+	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+		 memoryStoreEvictionPolicy="LRU" timeToIdleSeconds="1500" timeToLiveSeconds="300" overflowToDisk="true">
+	</cache>
+	<cache name="org.hibernate.cache.StandardQueryCache"
+		 memoryStoreEvictionPolicy="LRU" timeToIdleSeconds="1500" timeToLiveSeconds="300" overflowToDisk="true">
+	</cache>
+</ehcache>

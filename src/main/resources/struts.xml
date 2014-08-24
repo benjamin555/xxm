@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.custom.i18n.resources" value="message" />
+	<constant name="struts.convention.default.parent.package"
+		value="crud-default" />
+	<constant name="struts.convention.result.path" value="/WEB-INF/content" />
+	<constant name="struts.convention.package.locators" value="action" />
+	<constant name="struts.convention.package.locators.basePackage"
+		value="cn.sp.xm" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.multipart.saveDir" value="upload"></constant>
+	<constant name="struts.multipart.maxSize" value="1024102400"></constant>
+	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect"
+		value="true" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value="action,htm" />
+	<!-- 用于CRUD Action的parent package -->
+	<package name="crud-default" extends="convention-default">
+		<!-- 基于paramsPrepareParamsStack, 增加store interceptor保证actionMessage在redirect后不会丢失 -->
+		<interceptors>
+			<interceptor-stack name="crudStack">
+				<interceptor-ref name="store">
+					<param name="operationMode">AUTOMATIC</param>
+				</interceptor-ref>
+				<interceptor-ref name="paramsPrepareParamsStack" />
+			</interceptor-stack>
+			<interceptor-stack name="fileUploadStack">
+				<interceptor-ref name="fileUpload">
+					<!-- 允许上传的文件类型,可以到% Tomcat_home%/conf下的web.xml文件中找到所有文件类型的类型名 -->
+					<param name="allowedTypesSet">application/vnd.ms-excel,application/pdf,image/gif</param>
+					<!-- 允许上传的文件后缀,可以到% Tomcat_home%/conf下的web.xml文件中找到所有文件后缀的后缀名 -->
+					<param name="allowedExtensionsSet">xls,pdf,gif</param>
+					<!-- 单个文件允许的大小 -->
+					<param name="maximumSize">10240000000</param>
+				</interceptor-ref>
+				<interceptor-ref name="crudStack"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="i18n"
+				class="com.opensymphony.xwork2.interceptor.I18nInterceptor">
+			</interceptor>
+			<interceptor-stack name="i18nStack">
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="fileUploadStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="crudStack" />
+
+	</package>
+
+	<package name="default" extends="struts-default">
+		<global-results>
+			<result name="methodNotSupported" type="httpheader">
+				<param name="error">405</param>
+				<param name="errorMessage">The requested method is unsupported</param>
+			</result>
+			<result name="error" type="redirect">/common/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.NoSuchMethodException"
+				result="methodNotSupported" />
+			<exception-mapping exception="java.lang.IllegalArgumentException"
+				result="methodNotSupported" />
+			<exception-mapping exception="java.lang.Throwable"
+				result="error" />
+		</global-exception-mappings>
+
+
+
+	</package>
+
+
+
+	<!-- 使用Convention插件,实现约定大于配置的零配置文件风格. 特殊的Result路径在Action类中使用@Result设定. -->
+</struts>
