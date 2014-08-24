@@ -246,6 +246,24 @@ $(function(){
 	);
 	
 	
+	$("#rdForm").submit(function(){
+		var realAnswer = $("#realAnswer").val();
+		var userAnswer = $("#userAnswer").val();
+		var span = $(msgHtml);
+		if($.trim(realAnswer)==$.trim(userAnswer)){
+			$("#pass").val(true);
+			return true;
+		}else{
+			span=span.text("(扣3分)答案不对，再想想");
+			addDeduction(3);
+			$("#msgDiv").append(span);
+			scroll(0,0);
+			return false;
+		}
+		
+	});
+	
+	
 	
 });
 
