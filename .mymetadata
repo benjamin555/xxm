@@ -3,7 +3,7 @@
   type="WEB"
   name="jbossews"
   id="myeclipse.1408849627181"
-  context-root="/jbossews"
+  context-root="/xxm"
   j2ee-spec="6.0"
   archive="jbossews.war">
   <attributes>

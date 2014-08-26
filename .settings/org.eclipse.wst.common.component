@@ -2,7 +2,7 @@
 <project-modules id="moduleCoreId" project-version="1.5.0">
   <wb-module deploy-name="jbossews">
         <property name="java-output-path" value="/jbossews/src/main/webapp/src/main/java"/>
-        <property name="context-root" value="/jbossews"/>
+        <property name="context-root" value="/xxm"/>
     <wb-resource deploy-path="/" source-path="src/main/webapp"/>
     <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
     <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
