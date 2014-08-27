@@ -314,7 +314,7 @@ function isLucky(){
 // 需要分享的内容，请放到ready里
 WeixinApi.ready(function(Api) {
      var basePath=$("#basePath").val();
-     var url = $("#url").val();
+     var url = window.location.href;
     // 微信分享的数据
     var wxData = {
         "appId": "", // 服务号可以填写appId
