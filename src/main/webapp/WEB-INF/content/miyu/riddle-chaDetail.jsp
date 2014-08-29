@@ -84,7 +84,9 @@
 				<button type="button" id="pengmeng" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;蓬蒙&nbsp;&nbsp;&nbsp;</button>
 				<button type="button" id="weixin" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;月亮&nbsp;&nbsp;&nbsp;</button>
 			</div>
-			
+			<div>
+			<a href="<%=basePath %>miyu/riddle!input.action" > <span class="badge" style="background-color: #f0ad4e;">写一个给好友</span></a>
+			</div>
 			<%@include file="/common/footer.jsp"%>
 		</div>
 		
@@ -320,8 +322,8 @@ WeixinApi.ready(function(Api) {
         "appId": "", // 服务号可以填写appId
         "imgUrl" : basePath+"images/moon.jpg",
         "link" : url,
-        "desc" : '中秋节猜灯谜。这道题有点意思，大家也来猜猜看!',
-        "title" : "中秋猜灯谜"
+        "desc" : '我猜我猜我猜猜猜!',
+        "title" : "快来猜灯谜吧"
     };
 
     // 分享的回调
