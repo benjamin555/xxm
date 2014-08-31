@@ -24,11 +24,11 @@
 			<form role="form" action="<%=basePath%>miyu/riddle!save.action" method="post">
 				<div class="form-group">
 					<label for="question">谜面</label> 
-					<textarea placeholder="请输入..." required rows="7"  class="form-control" name="question" ></textarea>
+					<textarea placeholder="愚公之家（打一成语）" required rows="7"  class="form-control" name="question" ></textarea>
 				</div>
 				<div class="form-group">
 					<label for="answer">谜底</label> <input required  name="answer"
-						type="text" class="form-control" id="answer" placeholder="请输入..."
+						type="text" class="form-control" id="answer" placeholder="开门见山"
 						>
 				</div>
 				<button type="submit" class="btn btn-default">提交</button>
