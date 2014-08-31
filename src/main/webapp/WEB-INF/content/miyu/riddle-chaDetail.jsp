@@ -320,7 +320,7 @@ WeixinApi.ready(function(Api) {
         "appId": "", // 服务号可以填写appId
         "imgUrl" : basePath+"images/moon.jpg",
         "link" : url,
-        "desc" : '我猜我猜我猜猜猜!',
+        "desc" : '中秋猜灯谜！我猜我猜我猜猜猜!',
         "title" : "快来猜灯谜吧"
     };
 

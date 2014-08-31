@@ -65,7 +65,7 @@ WeixinApi.ready(function(Api) {
         "appId": "", // 服务号可以填写appId
         "imgUrl" : basePath+"images/moon.jpg",
         "link" : url,
-        "desc" : '这是我的分数，你敢接受挑战吗!',
+        "desc" : '中秋猜灯谜！这是我的分数，你敢接受挑战吗!',
         "title" : "快来猜灯谜吧"
     };
 
