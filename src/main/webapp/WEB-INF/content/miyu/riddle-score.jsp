@@ -65,8 +65,8 @@ WeixinApi.ready(function(Api) {
         "appId": "", // 服务号可以填写appId
         "imgUrl" : basePath+"images/moon.jpg",
         "link" : url,
-        "desc" : '中秋节猜灯谜。这是我的分数，大家也来试试看!',
-        "title" : "中秋猜灯谜"
+        "desc" : '这是我的分数，你敢接受挑战吗!',
+        "title" : "快来猜灯谜吧"
     };
 
     // 分享的回调

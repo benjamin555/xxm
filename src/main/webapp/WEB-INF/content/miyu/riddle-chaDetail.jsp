@@ -320,8 +320,8 @@ WeixinApi.ready(function(Api) {
         "appId": "", // 服务号可以填写appId
         "imgUrl" : basePath+"images/moon.jpg",
         "link" : url,
-        "desc" : '中秋节猜灯谜。这道题有点意思，大家也来猜猜看!',
-        "title" : "中秋猜灯谜"
+        "desc" : '我猜我猜我猜猜猜!',
+        "title" : "快来猜灯谜吧"
     };
 
     // 分享的回调
