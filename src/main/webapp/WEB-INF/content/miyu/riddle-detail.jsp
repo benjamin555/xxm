@@ -16,6 +16,7 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 <%@include file="/common/bootstrap-header.jsp"%>
+<script type="text/javascript" src="<%=basePath%>js/app/miyu/riddle.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/app/miyu/riddle-detail.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/app/miyu/riddle.css">
@@ -31,8 +32,14 @@
 	</li>
 </ul>
 	<div class="container">
+	<!-- tips -->
+		<s:iterator value="riddle.tips"  var="t" status="status">
+			<s:hidden name="tip" value="%{#t.content}"></s:hidden>
+		</s:iterator>
+		
+	
 		<div class="jumbotron">
-			<h1>灯谜</h1>
+			<h3>复制链接，把题分享给好友们吧</h3>
 			<div id="msgDiv">
 			<s:iterator value="%{actionMessages}" var="msg">
 				<span class="label label-warning"><s:property value="msg" />
@@ -43,18 +50,18 @@
 			<p class="descr">
 				<s:property value="riddle.question" />
 			</p>
-			<p>share it</p>
-			<form role="form" action="<%=basePath%>miyu/riddle!check.action"
-				method="post">
+			<form role="form" action="<%=basePath%>miyu/riddle!showRight.action"
+				method="get" id="rdForm">
 				<s:hidden name="id" value="%{riddle.id}"></s:hidden>
+				<s:hidden id="usedTipCount" name="usedTipCount" value="0"></s:hidden>
 				<s:hidden id="realAnswer" value="%{riddle.answer}"></s:hidden>
 				<div class="row" style="display: none;" id="answerDiv">
 					<!-- /.col-lg-6 -->
 					<div class="col-lg-6">
 						<div class="input-group">
-							<input type="text" class="form-control" name="answer"
+							<input type="text" class="form-control"  id="userAnswer"
 								placeholder="请输入谜底..."> <span class="input-group-btn">
-								<button class="btn btn-default" type="submit">就它了</button> </span>
+								<button class="btn btn-default" id="thatsit" type="button">就它了</button> </span>
 						</div>
 						<!-- /input-group -->
 					</div>
@@ -65,14 +72,11 @@
 			</br>
 			<div class="btn-group">
 				<button type="button" id="iKnownBtn" class="btn btn-primary ">哈我知道谜底啦</button>
-				<a href="<%=basePath%>miyu/riddle!show.action" class="btn btn-info "
-					role="button">换一条</a> <a
-					href="<%=basePath%>miyu/riddle!input.action"
-					class="btn btn-default " role="button">自己创建一条</a>
 			</div>
 			</br>
+			</br>
 			<div class="btn-group">
-				<button type="button" id="changer" class="btn btn-primary ">嫦娥仙子</button>
+				<button type="button" id="tipBtn" class="btn btn-primary ">提示</button>
 			</div>
 			
 			

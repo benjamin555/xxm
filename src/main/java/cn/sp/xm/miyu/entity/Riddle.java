@@ -1,9 +1,16 @@
 package cn.sp.xm.miyu.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import cn.sp.persistent.BaseEntity;
 
@@ -21,6 +28,11 @@ public class Riddle extends BaseEntity<Long>{
 	private String answer;
 	
 	private int zan;
+	
+	@OneToMany(mappedBy="riddle",cascade = CascadeType.ALL)
+	@OrderBy(value="ord")
+	@Fetch(value=FetchMode.JOIN)
+	private List<Tip> tips;
 
 	public String getQuestion() {
 		return question;
@@ -45,7 +57,15 @@ public class Riddle extends BaseEntity<Long>{
 	public void setZan(int zan) {
 		this.zan = zan;
 	}
-	
+
+	public List<Tip> getTips() {
+		return tips;
+	}
+
+	public void setTips(List<Tip> tips) {
+		this.tips = tips;
+	}
+
 	
 
 }

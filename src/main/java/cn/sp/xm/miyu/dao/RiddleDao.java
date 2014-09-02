@@ -54,6 +54,11 @@ public class RiddleDao extends BaseEntityDao<Riddle, Long>{
 		
 		logger.info(hql);
 		
+		Page<Riddle> page = findRandomPage(hql, size, values);
+		return page;
+	}
+
+	protected Page<Riddle> findRandomPage(String hql, int size, Map<String, Object> values) {
 		Query q = createQuery(hql, values);
 		Page<Riddle> page = new Page<Riddle>();
 		page.setPageSize(size);
@@ -62,12 +67,31 @@ public class RiddleDao extends BaseEntityDao<Riddle, Long>{
 			long totalCount = countHqlResult(hql, values);
 			page.setTotalCount(totalCount);
 		}
-		int random = (int) (Math.random()*(page.getTotalCount()-size));
+		long totalCount = page.getTotalCount();
+		int random = getRandomStart(size, totalCount);
+		logger.info("start:{}",random);
 		page.setStart(random);
 		setPageParameter(q, page);
 
 		List result = q.list();
 		page.setResult(result);
+		return page;
+	}
+
+	protected int getRandomStart(int size, long totalCount) {
+		int random = (int) (Math.random()*(totalCount-size));
+		return random;
+	}
+	
+	
+	public Page<Riddle> findRandomPage( int size, Map<String, String> searchMap) {
+		
+		Map<String, Object> values = new HashMap<String, Object>();
+		String hql = "select r from Riddle r  where r.isUse='Y' ";
+		String append = HqlUtil.buildHqlAppend(searchMap, values);
+		hql += append;
+		logger.info(hql);
+		Page<Riddle> page = findRandomPage(hql, size, values);
 		return page;
 	}
 

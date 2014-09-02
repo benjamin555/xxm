@@ -8,7 +8,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.Transformer;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.ExceptionMapping;
 import org.apache.struts2.convention.annotation.ExceptionMappings;
@@ -24,6 +26,7 @@ import cn.sp.action.CrudActionSupport;
 import cn.sp.utils.ConfigUtil;
 import cn.sp.web.utils.ServletUtils;
 import cn.sp.xm.miyu.entity.Riddle;
+import cn.sp.xm.miyu.entity.Tip;
 import cn.sp.xm.miyu.service.RiddleService;
 
 /**
@@ -97,6 +100,26 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 
 	@Override
 	public String save() throws Exception {
+		//过滤空的tip
+		List<Tip> tips = riddle.getTips();
+		if (tips!=null) {
+			CollectionUtils.filter(tips, new Predicate() {
+				@Override
+				public boolean evaluate(Object object) {
+					Tip tip = (Tip)object;
+					return StringUtils.isNotBlank(tip.getContent());
+				}
+			});
+			//排序
+			for (int i = 1; i <=tips.size(); i++) {
+				Tip	t = tips.get(i-1);
+				t.setOrd(i);
+				
+				t.setRiddle(riddle);
+				
+			}
+		}
+		
 		riddleService.save(riddle);
 		return "show";
 	}
@@ -248,8 +271,9 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 
 	@Override
 	protected void prepareModel() throws Exception {
-		// TODO Auto-generated method stub
-		
+		if (riddle==null) {
+			riddle = new Riddle();
+		}
 	}
 
 	public Riddle getRiddle() {

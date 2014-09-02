@@ -24,7 +24,7 @@
 	<input type="hidden" value="<%=basePath%>" id="basePath">
 	<div class="container">
 		<div class="jumbotron">
-			<h1><span class="label label-success">恭喜你答对啦</span></h1>
+			<h1><span class="label label-success">恭喜你答对啦,出题者造吗</span></h1>
 			<br/>
 			<label >谜面</label> 
 			<p class="descr">
@@ -36,12 +36,14 @@
 			
 				<s:property value="riddle.answer" />
 			</p>
-			<p>share it</p>
+			<p class="descr" >
+				用了<s:property value="#parameters.usedTipCount" />次提示
+			</p>
 			</br>
 			
 			<div class="btn-group">
-			<a href="<%=basePath%>miyu/riddle!show.action"
-				class="btn btn-info " role="button">再来一条</a>
+			<a href="javascript:void(0);" onclick="history.go(-1);"
+				class="btn btn-info " role="button">返回</a>
 			<a href="<%=basePath%>miyu/riddle!input.action"
 				class="btn btn-default " role="button">自己建一条</a>
 			</div>

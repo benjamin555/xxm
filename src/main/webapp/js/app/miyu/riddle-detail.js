@@ -1,23 +1,42 @@
+var msgHtml = '<div class="msg label-warning" ></div>';
 $(function(){
 	
 	$("#iKnownBtn").click(function(){
 		$("#answerDiv").show("slow");
 		
 	});
-	
-	$("#changer").click(function(){
-		var realAnswer = $("#realAnswer").val();
-		var span="";
-		if(realAnswer.length==1){
-			 span = '<span class="label label-warning" >答案就一个字，人家帮不了你</span>';
-		}else if(realAnswer.length>1){
-			var cha = realAnswer.substring(0,1);
-			 span = '<span class="label label-warning" >给你个字吧：'+cha+'</span>';
+	//提示次数
+	var tips = $(":hidden[name='tip']");
+	$("#tipBtn").click(function(){
+		var tipCount=Number($("#usedTipCount").val());
+		
+		if(tipCount>=tips.length){
+			addMsg("没有提示了");
+			$(this).attr("disabled",true);
+			return;
 		}else{
-			 span = '<span class="label label-warning" >出错了</span>';
+			var i = tipCount;
+			var t = "提示"+(i+1)+":";
+			addMsg(t+$(tips[i]).val());
 		}
-		$("#msgDiv").append(span);
-		scroll(0,0);
+		
+		tipCount++;
+		$("#usedTipCount").val(tipCount);
+		
 	});
+	
+	
+	$("#thatsit").click(function(){
+		var realAnswer = $("#realAnswer").val();
+		var userAnswer = $("#userAnswer").val();
+		if($.trim(realAnswer)==$.trim(userAnswer)){
+			$("#rdForm").submit();
+		}else{
+			addMsg("答案不对，再想想");
+			scroll(0,0);
+		}
+		
+	});
+	
 	
 });

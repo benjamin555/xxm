@@ -3,6 +3,7 @@ package cn.sp.xm.miyu.service;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import cn.sp.xm.miyu.entity.Riddle;
 @Transactional
 @SuppressWarnings({"rawtypes","unchecked"})
 public class RiddleService implements IBaseService<Riddle,Long>{
+	private static final int ZAN = 20;
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private RiddleDao dao;
@@ -71,12 +73,12 @@ public class RiddleService implements IBaseService<Riddle,Long>{
 	 * @return
 	 */
 	public Riddle recomend() {
-		long c = dao.getTotalCount();
-		
-		long random = (long)(Math.random()*c)+1;
-		logger.info("c:{},random:{}",c,random);
-		
-		return dao.getById(random);
+		//值得推荐的赞数
+		int zan = ZAN;
+		Map<String, String> searchMap = new LinkedHashMap<String, String>();
+		searchMap.put("flt_r_and_geI_zan", zan+"");
+		Page<Riddle> rPage = dao.findRandomPage(1, searchMap);
+		return rPage.getResult().get(0);
 	}
 
 	
