@@ -2,10 +2,15 @@ package cn.sp.xm.miyu.action;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
@@ -259,6 +264,22 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 		});
 		ServletUtils.writeJsonToPage(ServletActionContext.getResponse(), sls);
 		
+		return null;
+	}
+	
+	
+	
+	public String zan() {
+		riddleService.zan(riddle.getId());
+		ServletResponse response = ServletActionContext.getResponse();
+		try {
+			Map<String, String> ret = new HashMap<String, String>();
+			ret.put("result", "pass");
+			ServletUtils.writeJsonToPage(response, ret);
+		} catch (IOException e) {
+			logger.error("error.", e);
+		}
+
 		return null;
 	}
 	

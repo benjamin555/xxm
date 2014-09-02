@@ -20,7 +20,7 @@ import cn.sp.persistent.BaseEntity;
 * @email benjaminchen555@gmail.com
 */
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Riddle extends BaseEntity<Long>{
 	
 	private String question;

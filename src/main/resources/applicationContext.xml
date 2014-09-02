@@ -7,7 +7,7 @@
 					     http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd     
 					     http://cxf.apache.org/transports/http/configuration    
 					     http://cxf.apache.org/schemas/configuration/http-conf.xsd
-					   " default-lazy-init="true" >
+					   " >
 
 	<description>Spring公共配置 </description>
 	<!-- 定义受环境影响易变的变量 -->

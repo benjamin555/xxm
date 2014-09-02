@@ -23,21 +23,18 @@
 </head>
 <body>
 	<input type="hidden" value="<%=basePath%>" id="basePath">
-
 	<div class="container">
-	<!-- tips -->
-		<s:iterator value="riddle.tips"  var="t" status="status">
+		<!-- tips -->
+		<s:iterator value="riddle.tips" var="t" status="status">
 			<s:hidden name="tip" value="%{#t.content}"></s:hidden>
 		</s:iterator>
-		
-	
 		<div class="jumbotron">
 			<h3>复制链接，把题分享给好友们吧</h3>
 			<div id="msgDiv">
-			<s:iterator value="%{actionMessages}" var="msg">
-				<span class="label label-warning"><s:property value="msg" />
-				</span>
-			</s:iterator>
+				<s:iterator value="%{actionMessages}" var="msg">
+					<span class="label label-warning"><s:property value="msg" />
+					</span>
+				</s:iterator>
 			</div>
 			<br /> <label>谜面</label>
 			<p class="descr">
@@ -45,16 +42,17 @@
 			</p>
 			<form role="form" action="<%=basePath%>miyu/riddle!showRight.action"
 				method="get" id="rdForm">
-				<s:hidden name="id" value="%{riddle.id}"></s:hidden>
+				<s:hidden name="id" id="riddleId" value="%{riddle.id}"></s:hidden>
 				<s:hidden id="usedTipCount" name="usedTipCount" value="0"></s:hidden>
 				<s:hidden id="realAnswer" value="%{riddle.answer}"></s:hidden>
 				<div class="row" style="display: none;" id="answerDiv">
 					<!-- /.col-lg-6 -->
 					<div class="col-lg-6">
 						<div class="input-group">
-							<input type="text" class="form-control"  id="userAnswer"
+							<input type="text" class="form-control" id="userAnswer"
 								placeholder="请输入谜底..."> <span class="input-group-btn">
-								<button class="btn btn-default" id="thatsit" type="button">就它了</button> </span>
+								<button class="btn btn-default" id="thatsit" type="button">就它了</button>
+							</span>
 						</div>
 						<!-- /input-group -->
 					</div>
@@ -63,16 +61,20 @@
 				<!-- /.row -->
 			</form>
 			</br>
+			<button type="button" id="zanBtn" class="btn btn-default btn-lg">
+			  <span id="zan"
+						class="glyphicon glyphicon-thumbs-up"><s:property
+								value="riddle.zan" />
+					</span>
+			</button>
+			</br></br>
 			<div class="btn-group">
 				<button type="button" id="iKnownBtn" class="btn btn-primary ">哈我知道谜底啦</button>
 			</div>
-			</br>
-			</br>
+			</br> </br>
 			<div class="btn-group">
 				<button type="button" id="tipBtn" class="btn btn-primary ">提示</button>
 			</div>
-			
-			
 			<%@include file="/common/footer.jsp"%>
 		</div>
 	</div>

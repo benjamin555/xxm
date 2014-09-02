@@ -9,12 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
 * @author 陈嘉镇
 * @version 创建时间：2014-9-2 上午10:58:38
 * @email benjaminchen555@gmail.com
 */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Tip {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
