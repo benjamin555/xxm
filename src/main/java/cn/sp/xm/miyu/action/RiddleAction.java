@@ -249,7 +249,7 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 	}
 	
 	public String getAnsersByLen() throws Exception {
-		Page<Riddle> page = riddleService.getRandomPageByLen(5,len);
+		Page<Riddle> page = riddleService.getRandomPageByLen(9,len);
 		List<Riddle> ls = page.getResult();
 		Collection<String> sls = CollectionUtils.collect(ls, new Transformer() {
 			public Object transform(Object input) {

@@ -84,7 +84,7 @@ $(function(){
 	
 	$("#houyi").click(function(){
 		
-		//获取十个相同字数的答案,将答案插入其中
+		//获取9个相同字数的答案,将答案插入其中
 		var realAnswer = $("#realAnswer").val();
 		var len = realAnswer.length;
 		

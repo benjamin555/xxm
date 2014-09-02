@@ -1,6 +1,6 @@
 var msgHtml = '<div class="msg label-warning" ></div>';
 var spanHtml = '<span class="msg label-warning" ></span>';
-var btnHtml = '<button type="button" class="btn btn-info houyiBtn" style=" margin-bottom:.2em; margin-right:.2em;"></button>';
+var btnHtml = '<button type="button" class="btn btn-warning houyiBtn" style=" margin-bottom:.2em; margin-right:.2em;"></button>';
  
 //遮挡
 var msgModalHtml= '<span class="msg label-warning" style="position: relative;left: -6;"></span>';
@@ -9,7 +9,13 @@ function addBtns(msgs){
 	for(var i =0;i<msgs.length;i++){
 		var span=$(btnHtml);
 		span = span.text(msgs[i]);
+		
+		//设置为圆形
+		
 		$("#msgDiv").append(span);
+		var w = span.css("width");
+		span.css("height",w);
+		span.css("border-radius",w);
 	}
 	
 }
