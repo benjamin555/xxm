@@ -23,14 +23,7 @@
 </head>
 <body>
 	<input type="hidden" value="<%=basePath%>" id="basePath">
-<ul class="nav nav-pills" role="tablist">
-	<li role="presentation" class="active"><a
-		href="<%=basePath%>miyu/riddle!show.action">主页</a>
-	</li>
-	<li role="presentation" ><a
-		href="<%=basePath%>miyu/riddle!challenge.action">来10条挑战下</a>
-	</li>
-</ul>
+
 	<div class="container">
 	<!-- tips -->
 		<s:iterator value="riddle.tips"  var="t" status="status">
