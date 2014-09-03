@@ -17,7 +17,8 @@
 		<property name="locations">
 			<list>
 				<!-- 标准配置 -->
-				<value>classpath*:/application.properties</value>
+				<value>file:C:\xxmconfig\xxm_config.properties</value>
+				<value>file:/usr/local/xxmconfig/xxm_config.properties</value>
 			</list>
 		</property>
 	</bean>
