@@ -46,7 +46,7 @@
 			</p>
 			<form role="form"
 				action="<%=basePath%>miyu/riddle!challengeNext.action" method="post"
-				id="rdForm">
+				id="rdForm" style="margin-bottom: 2em;">
 				<s:hidden name="id" value="%{riddle.id}"></s:hidden>
 				<s:hidden id="realAnswer" value="%{riddle.answer}"></s:hidden>
 				<!-- 减分 -->
@@ -68,23 +68,21 @@
 				<!-- /.row -->
 				<div style="display: none;" id="skipDiv">
 					<label class="label label-warning" style="margin-right: 1em;">直接跳过本题（没分给哦）</label>
-					<br>
+					</br>
+					</br>
 					<button id="skipBtn" class="btn btn-default btn-lg" type="button">确认跳过</button>
 				</div>
 			</form>
-			<div class="btn-group" style="margin-bottom: .5em;">
+			<div class="btn-group" style="margin-bottom: 2em;">
 				<button type="button" id="iKnownBtn" class="btn btn-primary  btn-lg">我知道啦</button>
 				<a href="<%=basePath%>miyu/riddle!challenge.action"
 					class="btn btn-default btn-lg" role="button">重新开始</a>
 			</div>
 			</br>
-			<div class="btn-group tip-group" style="margin-bottom: .5em;">
+			<div class="btn-group tip-group" style="margin-bottom: 3em;">
 				<button type="button" id="changer" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;嫦娥&nbsp;&nbsp;&nbsp;</button>
 				<button type="button" id="houyi" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;后羿&nbsp;&nbsp;&nbsp;</button>
-			</div>
-			<div class="btn-group " style="margin-bottom: .5em;">
 				<button type="button" id="pengmeng" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;蓬蒙&nbsp;&nbsp;&nbsp;</button>
-				<button type="button" id="weixin" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;月亮&nbsp;&nbsp;&nbsp;</button>
 			</div>
 			
 			<%@include file="/common/footer.jsp"%>
