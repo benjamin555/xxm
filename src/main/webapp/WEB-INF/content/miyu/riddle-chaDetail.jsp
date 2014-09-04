@@ -20,8 +20,8 @@
 <meta http-equiv="description" content="This is my page">
 <%@include file="/common/bootstrap-header.jsp"%>
 <script type="text/javascript" src="<%=basePath%>js/app/miyu/riddle.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/app/miyu/riddle-chaDetail.js"></script>
-
+<script type="text/javascript"
+	src="<%=basePath%>js/app/miyu/riddle-chaDetail.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/app/miyu/riddle.css">
 </head>
 <body>
@@ -29,9 +29,11 @@
 	<input type="hidden" value="0" id="helpCount">
 	<input type="hidden" value="<%=perScore%>" id="perScore">
 	<input type="hidden" value="<%=url%>" id="url">
-	
 	<div class="container">
 		<div class="jumbotron" style="padding: 10px;">
+			<%@include file="/common/qq-login.jsp"%>
+			
+			
 			<h1>灯谜</h1>
 			<div id="msgDiv">
 				<s:iterator value="%{actionMessages}" var="msg">
@@ -41,8 +43,10 @@
 				</s:iterator>
 			</div>
 			<label>谜面</label>
-			<p class="descr">
-				<s:property value="riddle.question" />
+			<p class="descr ">
+				
+						<s:property value="riddle.question" />
+					
 			</p>
 			<form role="form"
 				action="<%=basePath%>miyu/riddle!challengeNext.action" method="post"
@@ -68,8 +72,7 @@
 				<!-- /.row -->
 				<div style="display: none;" id="skipDiv">
 					<label class="label label-warning" style="margin-right: 1em;">直接跳过本题（没分给哦）</label>
-					</br>
-					</br>
+					</br> </br>
 					<button id="skipBtn" class="btn btn-default btn-lg" type="button">确认跳过</button>
 				</div>
 			</form>
@@ -84,13 +87,9 @@
 				<button type="button" id="houyi" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;后羿&nbsp;&nbsp;&nbsp;</button>
 				<button type="button" id="pengmeng" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;蓬蒙&nbsp;&nbsp;&nbsp;</button>
 			</div>
-			
 			<%@include file="/common/footer.jsp"%>
 		</div>
-		
-		
 	</div>
-	
 </body>
 </html>
 <script type="text/javascript">

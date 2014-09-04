@@ -42,7 +42,6 @@
 			</div>
 			
 			<div class="btn-group">
-				<button type="button" id="weixin" class="btn btn-default">分享</button>
 			
 				<a href="<%=basePath%>miyu/riddle!challenge.action" class="btn btn-default "
 					role="button">重新开始挑战</a>
