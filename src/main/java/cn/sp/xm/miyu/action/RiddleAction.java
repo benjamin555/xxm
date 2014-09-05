@@ -52,6 +52,11 @@ import cn.sp.xm.miyu.service.RiddleService;
 })
 public class RiddleAction extends CrudActionSupport<Riddle> {
 	
+	/**
+	 * 是否有分享按钮
+	 */
+	private boolean hasShare;
+	
 	private int len;
 	/**
 	 * 最大挑战题目数
@@ -379,6 +384,14 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 
 	public void setLen(int len) {
 		this.len = len;
+	}
+
+	public boolean isHasShare() {
+		return hasShare;
+	}
+
+	public void setHasShare(boolean hasShare) {
+		this.hasShare = hasShare;
 	}
 
 

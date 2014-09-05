@@ -87,7 +87,13 @@
 				<button type="button" id="houyi" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;后羿&nbsp;&nbsp;&nbsp;</button>
 				<button type="button" id="pengmeng" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;蓬蒙&nbsp;&nbsp;&nbsp;</button>
 			</div>
-			<%@include file="/common/footer.jsp"%>
+			<s:if test="%{hasShare}">
+				<%@include file="/common/footer-share.jsp"%>
+			</s:if>
+			<s:else>
+				<%@include file="/common/footer.jsp"%>
+			</s:else>
+			
 		</div>
 	</div>
 </body>
