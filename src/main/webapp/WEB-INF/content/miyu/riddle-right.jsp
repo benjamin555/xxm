@@ -25,7 +25,7 @@
 	<s:hidden name="id" id="riddleId" value="%{riddle.id}"></s:hidden>
 	<div class="container">
 		<div class="jumbotron">
-			<h1><span class="label label-success">恭喜你答对啦,出题者造吗</span></h1>
+			<h1><span class="label label-success">恭喜你答对啦</span></h1>
 			<br/>
 			<label >谜面</label> 
 			<p class="descr">
