@@ -45,6 +45,7 @@
 				<s:hidden name="id" id="riddleId" value="%{riddle.id}"></s:hidden>
 				<s:hidden id="usedTipCount" name="usedTipCount" value="0"></s:hidden>
 				<s:hidden id="realAnswer" value="%{riddle.answer}"></s:hidden>
+				<s:hidden name="hasShare" value="%{#parameters.hasShare}"></s:hidden>
 				<div class="row" style="display: none;" id="answerDiv">
 					<!-- /.col-lg-6 -->
 					<div class="col-lg-6">

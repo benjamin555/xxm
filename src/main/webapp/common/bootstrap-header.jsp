@@ -6,6 +6,6 @@
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 <script src="<%=basePath%>js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/WeixinApi.js"></script>
-
+<s:hidden id="hasShare" value="%{hasShare}"></s:hidden>
 
 

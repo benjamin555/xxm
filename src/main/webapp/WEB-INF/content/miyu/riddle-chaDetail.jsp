@@ -53,6 +53,7 @@
 				id="rdForm" style="margin-bottom: 2em;">
 				<s:hidden name="id" value="%{riddle.id}"></s:hidden>
 				<s:hidden id="realAnswer" value="%{riddle.answer}"></s:hidden>
+				<s:hidden name="hasShare" value="%{#parameters.hasShare}"></s:hidden>
 				<!-- 减分 -->
 				<input type="hidden" value="0" name="deduction" id="deduction">
 				<input type="hidden" value="false" name="pass" id="pass">
@@ -78,7 +79,7 @@
 			</form>
 			<div class="btn-group" style="margin-bottom: 2em;">
 				<button type="button" id="iKnownBtn" class="btn btn-primary  btn-lg">我知道啦</button>
-				<a href="<%=basePath%>miyu/riddle!challenge.action"
+				<a href="<%=basePath%>miyu/riddle!challenge.action?hasShare=<s:property value="#parameters.hasShare"/>"
 					class="btn btn-default btn-lg" role="button">重新开始</a>
 			</div>
 			</br>
@@ -87,12 +88,7 @@
 				<button type="button" id="houyi" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;后羿&nbsp;&nbsp;&nbsp;</button>
 				<button type="button" id="pengmeng" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;蓬蒙&nbsp;&nbsp;&nbsp;</button>
 			</div>
-			<s:if test="%{hasShare}">
-				<%@include file="/common/footer-share.jsp"%>
-			</s:if>
-			<s:else>
 				<%@include file="/common/footer.jsp"%>
-			</s:else>
 			
 		</div>
 	</div>

@@ -45,10 +45,10 @@ import cn.sp.xm.miyu.service.RiddleService;
 @Namespace("/miyu")
 @ExceptionMappings({ @ExceptionMapping(exception = "java.lang.Exception", result = "exception") })
 @Results({ @Result(name = "exception", location = "/common/error.jsp") 
-			,@Result(name="show",type="redirect",location="riddle!show.action",params={"id","${riddle.id}"})
-			,@Result(name="showRight",type="redirect",location="riddle!showRight.action",params={"id","${riddle.id}"})
-			,@Result(name="challenge-score",type="redirect",location="riddle!score.action",params={"score","${score}"})
-			,@Result(name="challenge",type="redirect",location="riddle!chaDetail.action",params={"id","${riddle.id}"})
+			,@Result(name="show",type="redirect",location="riddle!show.action",params={"id","${riddle.id}","hasShare","${hasShare}"})
+			,@Result(name="showRight",type="redirect",location="riddle!showRight.action",params={"id","${riddle.id}","hasShare","${hasShare}"})
+			,@Result(name="challenge-score",type="redirect",location="riddle!score.action",params={"score","${score}","hasShare","${hasShare}"})
+			,@Result(name="challenge",type="redirect",location="riddle!chaDetail.action",params={"id","${riddle.id}","hasShare","${hasShare}"})
 })
 public class RiddleAction extends CrudActionSupport<Riddle> {
 	
@@ -92,6 +92,9 @@ public class RiddleAction extends CrudActionSupport<Riddle> {
 		if (riddle==null) {
 			riddle = new Riddle();
 		}
+		
+		
+		
 		return riddle;
 	}
 

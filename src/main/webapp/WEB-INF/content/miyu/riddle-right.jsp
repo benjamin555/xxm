@@ -55,7 +55,7 @@
 			<div class="btn-group">
 			<a href="javascript:void(0);" onclick="history.go(-1);"
 				class="btn btn-info " role="button">返回</a>
-			<a href="<%=basePath%>miyu/riddle!input.action"
+			<a href="<%=basePath%>miyu/riddle!input.action?hasShare=<s:property value="#parameters.hasShare"/>"
 				class="btn btn-default " role="button">自己建一条</a>
 			</div>
 			<%@include file="/common/footer.jsp"%>

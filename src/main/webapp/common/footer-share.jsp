@@ -27,9 +27,9 @@ var jiathis_config = {data_track_clickback:'true'};
 <br/>
 <br/>
 	<div align="right" style="margin-top: 10px;">
-		<a href="<%=basePath%>miyu/riddle-input.action"> <span
+		<a href="<%=basePath%>miyu/riddle-input.action?hasShare=<s:property value="hasShare"/>"> <span
 			class="badge" style="background-color: #5bc0de;">建条给好友</span>
-		</a> <a href="<%=basePath%>miyu/riddle!challenge.action"> <span
+		</a> <a href="<%=basePath%>miyu/riddle!challenge.action?hasShare=<s:property value="hasShare"/>"> <span
 			class="badge" style="background-color: #5bc0de;">挑战赛</span>
 		</a> <a href="<%=basePath%>about.action"> <span class="badge"
 			style="background-color: #5bc0de;">关于我们</span>

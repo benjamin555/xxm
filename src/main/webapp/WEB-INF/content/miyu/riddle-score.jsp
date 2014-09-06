@@ -43,7 +43,7 @@
 			
 			<div class="btn-group">
 			
-				<a href="<%=basePath%>miyu/riddle!challenge.action" class="btn btn-default "
+				<a href="<%=basePath%>miyu/riddle!challenge.action?hasShare=<s:property value="#parameters.hasShare"/>" class="btn btn-default "
 					role="button">重新开始挑战</a>
 			</div>
 			</br>
