@@ -43,3 +43,9 @@ var jiathis_config = {data_track_clickback:'true'};
 			class="badge" style="background-color: #5bc0de;">挑战赛</span> </a>
 	</div>
 </s:else>
+<br />
+	<br />
+<div " style="margin-top: 10px;" class="foot_desc">
+	声明：此应用由“天天互动”提供，若您在使用中遇到问题，可以直接联系客户QQ:1484785159
+</div>
+
