@@ -31,7 +31,6 @@
 	<input type="hidden" value="<%=url%>" id="url">
 	<div class="container">
 		<div class="jumbotron" style="padding: 10px;">
-			<%@include file="/common/qq-login.jsp"%>
 			
 			
 			<h1>灯谜</h1>
