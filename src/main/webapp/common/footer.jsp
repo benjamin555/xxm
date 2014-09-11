@@ -46,6 +46,6 @@ var jiathis_config = {data_track_clickback:'true'};
 <br />
 	<br />
 <div " style="margin-top: 10px;" class="foot_desc">
-	声明：此应用由“天天互动”提供，若您在使用中遇到问题，可以直接联系客户QQ:1484785159
+	声明：此应用由“陈嘉镇”提供，若您在使用中遇到问题，可以直接联系客户QQ:1484785159
 </div>
 
