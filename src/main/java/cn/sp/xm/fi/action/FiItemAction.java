@@ -82,8 +82,8 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 
 	@Override
 	public String delete() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		service.deleteById(item.getId());
+		return list();
 	}
 
 	@Override

@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="input-group">
 						<input type="month" class="form-control" id="month" name="month"
 							placeholder="日期" value="<s:property value='month' />"><span class="input-group-btn">
-							<button id="queryBtn" class="btn btn-default" type="button">查询</button>
+							<button id="queryBtn" class="btn btn-default" type="button">转到</button>
 						</span>
 					</div>
 					<!-- /input-group -->
@@ -54,27 +54,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th>操作</th>
 				</tr>
 				<tr>
-					<td><input type="date" class="form-control" id="dat"
-						name="dat" placeholder="日期">
+					<td>
+					<div  class="form-group" id="datDiv"><input type="date" class="form-control" id="dat"
+						name="dat" placeholder="日期" required ></div>
 					</td>
 					<td><input type="text" class="form-control" id="description"
-						name="description" placeholder="摘要">
+						name="description" placeholder="摘要" required>
 					</td>
 					<td><input type="number" class="form-control" id="income"
-						name="income" placeholder="收入">
+						name="income" placeholder="收入" >
 					</td>
 					<td><input type="number" class="form-control" id="output"
-						name="output" placeholder="支出">
+						name="output" placeholder="支出" >
 					</td>
-					<td><input type="number" class="form-control" id="rest"
-						name="rest" readonly />
+					<td>
 					</td>
-					<td><button type="button" id="add" class="btn btn-default">新增</button>
+					<td>
+					<input type="submit"  id="subBtn" class="btn btn-default"></input>
 					</td>
 				</tr>
 				
 				<s:iterator value="items" var="i">
-					<tr class="item"><td><s:property value="#i.dat" /></td><td><s:property value="#i.description" /></td><td class="income"><s:property value="#i.income" /></td><td class="output"><s:property value="#i.output" /></td><td class="rest"><s:property value="#i.rest" /> </td><td></td></tr>
+					<tr class="item"><td><s:property value="#i.dat" /></td><td><s:property value="#i.description" /></td><td class="income"><s:property value="#i.income" /></td><td class="output"><s:property value="#i.output" /></td><td class="rest"></td><td><a href="fi/fi-item!delete.action?id=<s:property value="#i.id" />" class="btn btn-primary" role="button">删除</a></td></tr>
 				</s:iterator>
 				
 				
@@ -94,26 +95,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		$(function(){
 			
-			//设置合计行
+			//计算余额列
+			var lastRe=0;
+			$("tr.item>td.rest").each(function(i){
+				var income= Number($($(this).siblings(".income").get(0)).text()); 
+				var output= Number($($(this).siblings(".output").get(0)).text());
+				var re = lastRe+income -output;
+				$(this).text(re);
+				lastRe=re;
+			});
 			
+			//设置合计行
 			$("#sumIn").text( getGincome());
 			$("#sumOut").text( getGoutput());
 			$("#sumRest").text( getGrest());
 			
 			
-			$("#income,#output").change(function() {
-				var income = Number($("#income").val());
-				var output = Number($("#output").val());
-				var rs = getGrest() + income - output;
-				$("#rest").val(rs);
-			});
+			
 			
 			$("#queryBtn").click(function(){
 				$("#queryForm").submit();
 			});
-			
+			$("#itemForm").submit(function(){
+				if($("#dat").val().indexOf($("#month").val())<0){
+					$("#datDiv").addClass("has-error")
+								.focus()
+								.append('<label class="control-label" for="inputError1">不是当前月份</label>'); 
+					;
+					return false;
+				}
+				
+			});
 			
 			$("#add").click(function() {
+				if($("#dat").val().indexOf($("#month").val())<0){
+					$("#datDiv").addClass("has-error")
+								.focus()
+								.append('<label class="control-label" for="inputError1">不是当前月份</label>'); 
+					;
+					return;
+				}
 				$("#itemForm").submit();
 			});
 		});

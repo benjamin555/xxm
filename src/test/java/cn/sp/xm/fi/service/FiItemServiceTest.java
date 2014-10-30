@@ -31,7 +31,6 @@ public class FiItemServiceTest {
 		i.setDat(DateUtils.getCurrentDateStr("yyyy-MM-dd"));
 		i.setDescription("初始值");
 		i.setIncome(10000);
-		i.setRest(10000);
 		service.save(i);
 	}
 	

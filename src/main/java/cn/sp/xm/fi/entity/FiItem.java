@@ -20,7 +20,6 @@ public class FiItem extends BaseEntity<Long>{
 	
 	private double output;
 	
-	private double rest;
 
 
 	public String getDat() {
@@ -55,13 +54,6 @@ public class FiItem extends BaseEntity<Long>{
 		this.output = output;
 	}
 
-	public double getRest() {
-		return rest;
-	}
-
-	public void setRest(double rest) {
-		this.rest = rest;
-	}
 
 	
 	

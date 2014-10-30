@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.sp.persistent.BaseEntity;
 import cn.sp.service.IBaseService;
 import cn.sp.xm.fi.dao.FiItemDao;
 import cn.sp.xm.fi.entity.FiItem;
@@ -26,8 +27,7 @@ public class FiItemService implements IBaseService<FiItem,Long>{
 	}
 	@Override
 	public FiItem getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return fiItemDao.getById(id);
 	}
 	@Override
 	public void delete(FiItem entityObject) {
@@ -36,7 +36,10 @@ public class FiItemService implements IBaseService<FiItem,Long>{
 	}
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
+		
+		FiItem entityObject = getById(id);
+		entityObject.setIsUse(BaseEntity.NOTUSING);
+		fiItemDao.save(entityObject );
 		
 	}
 	@Override

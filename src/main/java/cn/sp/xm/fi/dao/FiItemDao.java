@@ -17,7 +17,7 @@ public class FiItemDao  extends BaseEntityDao<FiItem, Long>{
 
 	public List<FiItem> getByDate(int year, int month) {
 		Object[] values = new Object[]{""+year+"-"+month+"%"};
-		String hql = " from FiItem f where f.dat like ? ";
+		String hql = " from FiItem f where f.dat like ? and f.isUse='Y' order by f.dat";
 		return find(hql, values);
 	}
 
