@@ -16,7 +16,11 @@ import cn.sp.xm.fi.entity.FiItem;
 public class FiItemDao  extends BaseEntityDao<FiItem, Long>{
 
 	public List<FiItem> getByDate(int year, int month) {
-		Object[] values = new Object[]{""+year+"-"+month+"%"};
+		String monthString = month+"";
+		if (month<10) {
+			monthString="0"+month;
+		}
+		Object[] values = new Object[]{""+year+"-"+monthString+"%"};
 		String hql = " from FiItem f where f.dat like ? and f.isUse='Y' order by f.dat";
 		return find(hql, values);
 	}

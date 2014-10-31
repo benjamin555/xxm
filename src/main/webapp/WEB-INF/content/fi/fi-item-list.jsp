@@ -44,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div id='fiItem'>
 		<form class="form-inline" id="itemForm" role="form" action="fi/fi-item!save.action" method="post">
+			<input type="hidden" name="month" value="<s:property value='month' />">
 			<table id="fiItemTable" class="table table-striped table-bordered">
 				<tr>
 					<th>日期</th>
@@ -56,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tr>
 					<td>
 					<div  class="form-group" id="datDiv"><input type="date" class="form-control" id="dat"
-						name="dat" placeholder="日期" required ></div>
+						name="dat" placeholder="日期" required value="<s:property value='defaultDate' />" ></div>
 					</td>
 					<td><input type="text" class="form-control" id="description"
 						name="description" placeholder="摘要" required>

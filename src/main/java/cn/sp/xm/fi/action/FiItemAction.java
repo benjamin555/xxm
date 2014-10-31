@@ -39,6 +39,8 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	 */
 	private String month;
 	
+	private String defaultDate;
+	
 	@Autowired
 	private FiItemService service;
 	
@@ -54,6 +56,7 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 
 	@Override
 	public String list() throws Exception {
+		
 		if (StringUtils.isBlank(month)) {
 			Calendar c = Calendar.getInstance();
 			c.setTime(new Date());
@@ -61,6 +64,7 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 			int month= c.get(Calendar.MONTH)+1;
 			this.month = year+"-"+month;
 		}
+		defaultDate=month+"-01";
 		String[] s = month.split("-");
 		int year =Integer.parseInt(s[0]);
 		int month=Integer.parseInt(s[1]);
@@ -124,6 +128,15 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	public void setMonth(String month) {
 		this.month = month;
 	}
+
+	public String getDefaultDate() {
+		return defaultDate;
+	}
+
+	public void setDefaultDate(String defaultDate) {
+		this.defaultDate = defaultDate;
+	}
+
 	
 	
 
