@@ -1,16 +1,30 @@
 package cn.sp.utils;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jxls.exception.ParsePropertyException;
 import net.sf.jxls.reader.ReaderBuilder;
 import net.sf.jxls.reader.XLSReadMessage;
 import net.sf.jxls.reader.XLSReadStatus;
 import net.sf.jxls.reader.XLSReader;
+import net.sf.jxls.transformer.XLSTransformer;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,6 +87,92 @@ public class JxlsUtils {
 			}
 
 		}
+	}
+	
+	
+	/**
+	 * 导出Excel
+	 * 
+	 * @param response
+	 * @param srcFilePath
+	 *            模板文件的绝对路径
+	 * @param dataList
+	 *            数据集合
+	 * @throws Exception
+	 */
+	public static void exportXLS(HttpServletResponse response,
+			String srcFilePath, List dataList) throws Exception {
+		response.setHeader("Content-disposition", "attachment; filename=export"
+				+ System.currentTimeMillis() + ".xls");
+		response.setHeader("Content-Type", "application/vnd.ms-excel");
+		Map beanParams = new HashMap();
+		beanParams.put("dataList", dataList);
+		Workbook workbook = makeExcel(srcFilePath, beanParams);
+		OutputStream os = new BufferedOutputStream(response.getOutputStream());
+		workbook.write(os);
+		
+		os.flush();
+		os.close();
+	}
+
+	public static Workbook makeExcel(String transformFilePath,  Map<String, Object> beanParams)
+			 {
+		InputStream is = null;
+		org.apache.poi.ss.usermodel.Workbook workbook = null;
+		try {
+			
+			XLSTransformer transformer = new XLSTransformer();
+			 is = new BufferedInputStream(new FileInputStream(
+					 transformFilePath));
+			workbook = transformer
+					.transformXLS(is, beanParams);
+		} catch (ParsePropertyException e) {
+			logger.error("error.",e);
+		} catch (FileNotFoundException e) {
+			logger.error("error.",e);
+		} catch (InvalidFormatException e) {
+			logger.error("error.",e);
+		}finally{
+			try {
+				if (is!=null) {
+					is.close();
+				}
+			} catch (IOException e) {
+				logger.error("error.",e);
+			}
+		}
+		return workbook;
+	}
+
+
+	/**
+	 * 
+	 * @param destFilePath
+	 * @param transformFilePath
+	 * @param dateMap
+	 */
+	public static Workbook export(String destFilePath, String transformFilePath, Map<String, Object> dateMap) {
+		Workbook workbook = makeExcel(transformFilePath, dateMap);
+		OutputStream os =null;
+		 try {
+			os = new BufferedOutputStream(new FileOutputStream(new File(destFilePath)));
+			workbook.write(os );
+			os.flush();
+		} catch (FileNotFoundException e) {
+			logger.error("error.",e);
+		} catch (IOException e) {
+			logger.error("error.",e);
+		}finally{
+			if (os!=null) {
+				try {
+					os.close();
+				} catch (IOException e) {
+					logger.error("error.",e);
+				}
+			}
+		}
+		return workbook;
+		
 	}
 
 }

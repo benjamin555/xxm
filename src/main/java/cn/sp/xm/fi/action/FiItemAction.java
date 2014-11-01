@@ -1,10 +1,15 @@
 package cn.sp.xm.fi.action;
 
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.ExceptionMapping;
 import org.apache.struts2.convention.annotation.ExceptionMappings;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -16,7 +21,9 @@ import org.springframework.stereotype.Controller;
 
 import cn.sp.action.CrudActionSupport;
 import cn.sp.xm.fi.entity.FiItem;
+import cn.sp.xm.fi.entity.MonthSum;
 import cn.sp.xm.fi.service.FiItemService;
+import cn.sp.xm.fi.service.MonthSumService;
 
 /**
 * @author 陈嘉镇
@@ -37,14 +44,27 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	/**
 	 * 月份
 	 */
-	private String month;
+	private String monthStr;
 	
 	private String defaultDate;
 	
 	@Autowired
 	private FiItemService service;
+	@Autowired
+	private MonthSumService  monthSumService;
 	
 	private List<FiItem> items ;
+	
+	/**
+	 * 期初值
+	 */
+	private double init;
+	
+	/**
+	 * 本月合计
+	 */
+	private MonthSum monthSum;
+	
 
 	@Override
 	public FiItem getModel() {
@@ -57,18 +77,28 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	@Override
 	public String list() throws Exception {
 		
-		if (StringUtils.isBlank(month)) {
+		if (StringUtils.isBlank(monthStr)) {
 			Calendar c = Calendar.getInstance();
 			c.setTime(new Date());
 			int year = c.get(Calendar.YEAR);
 			int month= c.get(Calendar.MONTH)+1;
-			this.month = year+"-"+month;
+			this.monthStr = year+"-"+month;
 		}
-		defaultDate=month+"-01";
-		String[] s = month.split("-");
+		defaultDate=monthStr+"-01";
+		String[] s = monthStr.split("-");
 		int year =Integer.parseInt(s[0]);
 		int month=Integer.parseInt(s[1]);
-		items = service.getByDate(year,month);
+		
+		
+		monthSum = monthSumService.getByMonth(year, month);
+		logger.info("sum:{}",monthSum);
+		
+		items = monthSum.getItems();
+		
+		MonthSum lastMonth = monthSum.getLast();
+		if (lastMonth!=null) {
+			init = lastMonth.getRest();
+		}
 		return "list";
 	}
 
@@ -89,6 +119,21 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 		service.deleteById(item.getId());
 		return list();
 	}
+	
+	public String exportExcel() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setHeader("Content-disposition", "attachment; filename=export"
+				+ System.currentTimeMillis() + ".xls");
+		response.setHeader("Content-Type", "application/vnd.ms-excel");
+		OutputStream os = new BufferedOutputStream(response.getOutputStream());
+		String transformFilePath = "WEB-INF/xls/fiitem-list.xls";
+		 transformFilePath = ServletActionContext.getServletContext().getRealPath(transformFilePath);
+		monthSumService.exportExcel(transformFilePath,os,monthSum.getId());
+		
+		return list();
+	}
+	
+	
 
 	@Override
 	protected void prepareModel() throws Exception {
@@ -121,12 +166,21 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 		this.items = items;
 	}
 
-	public String getMonth() {
-		return month;
+
+	public String getDefaultMonth() {
+		return monthStr;
 	}
 
-	public void setMonth(String month) {
-		this.month = month;
+	public void setDefaultMonth(String defaultMonth) {
+		this.monthStr = defaultMonth;
+	}
+
+	public MonthSumService getMonthSumService() {
+		return monthSumService;
+	}
+
+	public void setMonthSumService(MonthSumService monthSumService) {
+		this.monthSumService = monthSumService;
 	}
 
 	public String getDefaultDate() {
@@ -135,6 +189,31 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 
 	public void setDefaultDate(String defaultDate) {
 		this.defaultDate = defaultDate;
+	}
+
+	public double getInit() {
+		return init;
+	}
+
+	public void setInit(double init) {
+		this.init = init;
+	}
+
+
+	public MonthSum getMonthSum() {
+		return monthSum;
+	}
+
+	public void setMonthSum(MonthSum monthSum) {
+		this.monthSum = monthSum;
+	}
+
+	public String getMonthStr() {
+		return monthStr;
+	}
+
+	public void setMonthStr(String monthStr) {
+		this.monthStr = monthStr;
 	}
 
 	

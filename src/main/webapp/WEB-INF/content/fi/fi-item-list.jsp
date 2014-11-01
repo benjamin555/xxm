@@ -24,14 +24,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  	
+  	<input type="hidden" id="monthSumId" value="<s:property value='monthSum.id' />">
+  	<input type="hidden" id="init" value="<s:property value='init' />">
 	<div>
 		<form class="form-horizontal" role="form" id="queryForm" action="fi/fi-item!list.action">
 			<div class="row" id="answerDiv">
 				<!-- /.col-lg-6 -->
 				<div class="col-lg-6">
 					<div class="input-group">
-						<input type="month" class="form-control" id="month" name="month"
-							placeholder="日期" value="<s:property value='month' />"><span class="input-group-btn">
+						<input type="month" class="form-control" id="month" name="monthStr"
+							placeholder="日期" value="<s:property value='monthStr' />"><span class="input-group-btn">
 							<button id="queryBtn" class="btn btn-default" type="button">转到</button>
 						</span>
 					</div>
@@ -41,10 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!-- /.row -->
 		</form>
+		
 	</div>
+	<div> <h1>期初值：<s:property value="init" /> <span><a   href="fi/fi-item!exportExcel.action?monthSum.id=<s:property value='monthSum.id' />" class="btn btn-primary" >导出</a></span> </h1> </div>
 	<div id='fiItem'>
 		<form class="form-inline" id="itemForm" role="form" action="fi/fi-item!save.action" method="post">
-			<input type="hidden" name="month" value="<s:property value='month' />">
+			<input type="hidden" name="monthStr" value="<s:property value='monthStr' />">
 			<table id="fiItemTable" class="table table-striped table-bordered">
 				<tr>
 					<th>日期</th>
@@ -52,6 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<th>收入</th>
 					<th>支出</th>
 					<th>余额</th>
+					<th>经手人</th>
 					<th>操作</th>
 				</tr>
 				<tr>
@@ -70,23 +76,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</td>
 					<td>
 					</td>
+					<td><input type="text" class="form-control" 
+						name="handler" placeholder="经手人" required >
+					</td>
 					<td>
 					<input type="submit"  id="subBtn" class="btn btn-default"></input>
 					</td>
 				</tr>
 				
 				<s:iterator value="items" var="i">
-					<tr class="item"><td><s:property value="#i.dat" /></td><td><s:property value="#i.description" /></td><td class="income"><s:property value="#i.income" /></td><td class="output"><s:property value="#i.output" /></td><td class="rest"></td><td><a href="fi/fi-item!delete.action?id=<s:property value="#i.id" />" class="btn btn-primary" role="button">删除</a></td></tr>
+					<tr class="item"><td><s:property value="#i.dat" /></td><td><s:property value="#i.description" /></td><td class="income"><s:property value="#i.income" /></td><td class="output"><s:property value="#i.output" /></td><td class="rest"></td><td><s:property value="#i.handler" /></td><td><a href="fi/fi-item!delete.action?id=<s:property value="#i.id" />" class="btn btn-primary" role="button">删除</a></td></tr>
 				</s:iterator>
-				
-				
 				
 				<tr class="danger" id="sumTr">
 					<td></td>
 					<td>本月合计</td>
-					<td id="sumIn"></td>
-					<td id="sumOut"></td>
-					<td id="sumRest"></td>
+					<td id="sumIn"><s:property  value="monthSum.income" /> </td>
+					<td id="sumOut"><s:property  value="monthSum.output" /></td>
+					<td id="sumRest"><s:property  value="monthSum.rest" /></td>
+					<td></td>
 					<td></td>
 				</tr>
 			</table>
@@ -97,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(function(){
 			
 			//计算余额列
-			var lastRe=0;
+			var lastRe=Number($("#init").val());
 			$("tr.item>td.rest").each(function(i){
 				var income= Number($($(this).siblings(".income").get(0)).text()); 
 				var output= Number($($(this).siblings(".output").get(0)).text());
@@ -106,11 +114,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				lastRe=re;
 			});
 			
-			//设置合计行
-			$("#sumIn").text( getGincome());
-			$("#sumOut").text( getGoutput());
-			$("#sumRest").text( getGrest());
-			
+			$("#exportBtn").click(function(){
+				var monthSumId = $("#monthSumId").val();
+				$("#queryForm").attr("action","fi/fi-item!exportExcel.action?monthSum.id="+monthSumId)
+				$("#queryForm").submit();	
+			});
 			
 			
 			
@@ -140,29 +148,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
 		
-		/**
-		*获取余额
-		*/
-		function getGrest(){
-			return Number($(".rest:last").text());
-		}
-		function getGincome(){
-			var g =0;
-			
-			$(".income").each(function(){
-				  var i = Number($(this).text());
-				  g+=i;
-			}); 
-			return g;
-		}
-		function getGoutput(){
-			var g =0;
-			$(".output").each(function(){
-				  var i = Number($(this).text());
-				  g+=i;
-			});
-			return g;
-		}
 		
 		
 		

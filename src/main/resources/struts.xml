@@ -14,7 +14,7 @@
 	<constant name="struts.multipart.maxSize" value="1024102400"></constant>
 	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect"
 		value="true" />
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.action.extension" value="action,htm" />
 	<!-- 用于CRUD Action的parent package -->
 	<package name="crud-default" extends="convention-default">

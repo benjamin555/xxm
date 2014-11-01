@@ -1,6 +1,9 @@
 package cn.sp.xm.fi.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import cn.sp.persistent.BaseEntity;
 
@@ -11,7 +14,15 @@ import cn.sp.persistent.BaseEntity;
 */
 @Entity
 public class FiItem extends BaseEntity<Long>{
+	/**
+	 * 日期分隔符
+	 */
+	private static final String DATE_SEP = "-";
 	
+	@ManyToOne
+	@JoinColumn(name="sum_id")
+	private MonthSum sum;
+
 	private String dat;
 	
 	private String description;
@@ -19,6 +30,14 @@ public class FiItem extends BaseEntity<Long>{
 	private double income;
 	
 	private double output;
+	
+	/**
+	 * 经手人
+	 */
+	private String handler;
+	
+	@Transient
+	private double rest;
 	
 
 
@@ -54,8 +73,42 @@ public class FiItem extends BaseEntity<Long>{
 		this.output = output;
 	}
 
+	@Transient
+	public int getYear() {
+		String[] strings = dat.split(DATE_SEP);
+		return Integer.parseInt(strings[0]);
+	}
+	@Transient
+	public int getMonth() {
+		String[] strings = dat.split(DATE_SEP);
+		return Integer.parseInt(strings[1]);
+	}
 
-	
+	public String getHandler() {
+		return handler;
+	}
+
+	public void setHandler(String handler) {
+		this.handler = handler;
+	}
+
+	public MonthSum getSum() {
+		return sum;
+	}
+
+	public void setSum(MonthSum sum) {
+		this.sum = sum;
+	}
+
+	public double getRest() {
+		return rest;
+	}
+
+	public void setRest(double rest) {
+		this.rest = rest;
+	}
+
+
 	
 	
 
