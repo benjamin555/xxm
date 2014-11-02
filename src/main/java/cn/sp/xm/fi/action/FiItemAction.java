@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.sp.action.CrudActionSupport;
+import cn.sp.utils.DateUtils;
 import cn.sp.xm.fi.entity.FiItem;
 import cn.sp.xm.fi.entity.MonthSum;
 import cn.sp.xm.fi.service.FiItemService;
@@ -123,10 +124,10 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	public String exportExcel() throws Exception {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setHeader("Content-disposition", "attachment; filename=export"
-				+ System.currentTimeMillis() + ".xls");
+				+ DateUtils.getCurrentDateStr("yyyy-MM-dd HHmmss") + ".xlsx");
 		response.setHeader("Content-Type", "application/vnd.ms-excel");
 		OutputStream os = new BufferedOutputStream(response.getOutputStream());
-		String transformFilePath = "WEB-INF/xls/fiitem-list.xls";
+		String transformFilePath = "WEB-INF/xls/fiitem-list.xlsx";
 		 transformFilePath = ServletActionContext.getServletContext().getRealPath(transformFilePath);
 		monthSumService.exportExcel(transformFilePath,os,monthSum.getId());
 		
