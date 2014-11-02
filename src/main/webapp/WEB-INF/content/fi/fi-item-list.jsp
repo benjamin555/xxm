@@ -68,11 +68,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td><input type="text" class="form-control" id="description"
 						name="description" placeholder="摘要" required>
 					</td>
-					<td><input type="number" class="form-control" id="income"
-						name="income" placeholder="收入" >
+					<td><input type="number" min="0" class="form-control" id="income"
+						name="income" placeholder="收入" step="0.01" >
 					</td>
 					<td><input type="number" class="form-control" id="output"
-						name="output" placeholder="支出" >
+						name="output" placeholder="支出" min="0" >
 					</td>
 					<td>
 					</td>
