@@ -85,7 +85,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				
 				<s:iterator value="items" var="i">
-					<tr class="item"><td><s:property value="#i.dat" /></td><td><s:property value="#i.description" /></td><td class="income"><s:property value="#i.income" /></td><td class="output"><s:property value="#i.output" /></td><td class="rest"></td><td><s:property value="#i.handler" /></td><td><a href="fi/fi-item!delete.action?id=<s:property value="#i.id" />" class="btn btn-primary" role="button">删除</a></td></tr>
+					<tr class="item">
+					<td><s:property value="#i.dat" /></td>
+					<td><s:property value="#i.description" /></td>
+					<td class="income"><s:property value="#i.income" /></td>
+					<td class="output"><s:property value="#i.output" /></td>
+					<td class="rest"></td><td><s:property value="#i.handler" /></td>
+					<td><a href="fi/fi-item!delete.action?id=<s:property value="#i.id" />" class="btn btn-primary" role="button">删除</a></td>
+					</tr>
 				</s:iterator>
 				
 				<tr class="danger" id="sumTr">

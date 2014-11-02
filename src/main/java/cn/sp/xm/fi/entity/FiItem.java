@@ -31,6 +31,7 @@ public class FiItem extends BaseEntity<Long>{
 	
 	private double output;
 	
+	
 	/**
 	 * 经手人
 	 */
