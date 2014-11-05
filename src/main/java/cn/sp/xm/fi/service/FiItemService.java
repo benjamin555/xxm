@@ -32,19 +32,24 @@ public class FiItemService implements IBaseService<FiItem,Long>{
 	@Autowired
 	private MonthSumService monthService;
 	public void save(FiItem i) {
-		
 		int year = i.getYear();
 		int month = i.getMonth();
-		
 		MonthSum sum = monthSumDao.findByMonth(year,month);
+		
 		if (sum==null) {
 			sum = addMonthSum(year, month);
 		}
-		sum.recount(i.getIncome(),i.getOutput());
-		monthSumDao.save(sum);
-		i.setSum(sum);
+		if (i.getId()==null) {
+			//新增
+			i.setSum(sum);
+			sum.addItem(i);
+		}
 		fiItemDao.save(i);
-		updateNexts(sum,i.getIncome(),i.getOutput());
+		
+		sum.recount();
+		monthSumDao.save(sum);
+		
+		updateNexts(sum);
 		
 	}
 	
@@ -52,8 +57,8 @@ public class FiItemService implements IBaseService<FiItem,Long>{
 	 * 更新随后的汇总
 	 * @param sum
 	 */
-	private void updateNexts(MonthSum sum,double in,double out) {
-		monthService.updateNexts(sum, in, out);
+	private void updateNexts(MonthSum sum) {
+		monthService.updateNexts(sum);
 	}
 
 	/**
@@ -83,7 +88,7 @@ public class FiItemService implements IBaseService<FiItem,Long>{
 		fiItemDao.save(entityObject );
 		sum.remove(entityObject);
 		monthSumDao.save(sum);
-		updateNexts(sum, -entityObject.getIncome(), -entityObject.getOutput());
+		updateNexts(sum);
 		
 	}
 	@Override
@@ -93,6 +98,33 @@ public class FiItemService implements IBaseService<FiItem,Long>{
 	}
 	public List<FiItem> getByDate(int year, int month) {
 		return fiItemDao.getByDate(year,month);
+	}
+
+	public void updateSingleField(long id, String fieldName, String value) {
+		FiItem f = fiItemDao.getById(id);
+		if("description".equals(fieldName)){
+			f.setDescription(value);
+			fiItemDao.save(f);
+			return;
+		}
+		if("handler".equals(fieldName)){
+			f.setHandler(value);
+			fiItemDao.save(f);
+			return;
+		}
+		if("income".equals(fieldName)){
+			f.setIncome(Double.parseDouble(value));
+			save(f);
+			return;
+		}
+		if("output".equals(fieldName)){
+			f.setOutput(Double.parseDouble(value));
+			save(f);
+			return;
+		}
+		
+		
+		
 	}
 
 	

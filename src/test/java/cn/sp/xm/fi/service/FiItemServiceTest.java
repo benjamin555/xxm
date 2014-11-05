@@ -155,10 +155,54 @@ public class FiItemServiceTest {
 		logger.info("testtset");
 		Workbook w = JxlsUtils.export(destFilePath, transformFilePath, dateMap);
 
-		Sheet sheet = w.getSheet("fiitem-list");
+		Sheet sheet =w.getSheetAt(0);
 		Double init = Double.parseDouble(sheet.getRow(0).getCell(1).toString());
 		Assert.isTrue(10200 == init);
 
+	}
+	
+	/**
+	 * 更新行项目
+	 * @throws Exception
+	 */
+	@Test
+	public void testUpdateItem() throws Exception {
+		FiItem i = new FiItem();
+		i.setDat("2013-09-01");
+		i.setDescription("期初值");
+		i.setIncome(10000);
+		service.save(i);
+
+		FiItem i2 = new FiItem();
+		i2.setDat("2013-09-02");
+		i2.setDescription("吃饭");
+		i2.setOutput(200);
+		service.save(i2);
+
+		FiItem i3 = new FiItem();
+		i3.setDat("2013-09-02");
+		i3.setDescription("收入");
+		i3.setIncome(400);
+		service.save(i3);
+		
+		MonthSum sum = monthService.getByMonth(2013, 10);
+
+		FiItem i4 = new FiItem();
+		i4.setDat("2013-10-02");
+		i4.setDescription("收入");
+		i4.setIncome(400);
+		service.save(i4);
+		Assert.isTrue(sum.getRest() == 10600);
+		
+		service.delete(i2);
+		Assert.isTrue(sum.getRest() == 10800);
+		
+		i3.setIncome(1000);
+		i3.setOutput(100);
+		service.save(i3);
+		Assert.isTrue(sum.getRest() == 11300);
+		
+		
 	}
 
 }

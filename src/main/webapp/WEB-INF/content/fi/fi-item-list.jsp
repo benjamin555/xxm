@@ -18,8 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<%@include file="/common/bootstrap-header.jsp"%>
-	<script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
+	<%@include file="/common/bootstrap-editable.jsp"%>
 
   </head>
   
@@ -87,10 +86,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<s:iterator value="items" var="i">
 					<tr class="item">
 					<td><s:property value="#i.dat" /></td>
-					<td><s:property value="#i.description" /></td>
-					<td class="income"><s:property value="#i.income" /></td>
-					<td class="output"><s:property value="#i.output" /></td>
-					<td class="rest"></td><td><s:property value="#i.handler" /></td>
+					<td><a href="#" data-pk="<s:property value="#i.id" />"  data-type="text"    data-name="description" ><s:property value="#i.description" /></a></td>
+					<td class="income"><a href="#" data-pk="<s:property value="#i.id" />" data-type="number"  data-name="income" data-step="0.01" ><s:property value="#i.income" /></a></td>
+					<td class="output"><a href="#" data-pk="<s:property value="#i.id" />" data-type="number"  data-name="output" data-step="0.01" ><s:property value="#i.output" /></a></td>
+					<td class="rest"></td><td><a href="#" data-pk="<s:property value="#i.id" />" data-type="text"   data-name="handler" ><s:property value="#i.handler" /></a></td>
 					<td><a href="fi/fi-item!delete.action?id=<s:property value="#i.id" />" class="btn btn-primary" role="button">删除</a></td>
 					</tr>
 				</s:iterator>
@@ -110,6 +109,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 		
 		$(function(){
+			
+			 $('a[data-name]').editable({
+				 url:"fi/fi-item!updateSingleField.action"
+				 ,success: function(response, newValue) {
+				        if(response.status == 'error') {
+				        	return response.msg; //msg will be shown in editable form
+				        }else{
+				        	//刷新页面
+				        	$("#itemForm").attr("action","fi/fi-item!list.action");
+				        	$("#itemForm").submit();
+				        }
+				    }
+			 });
+			 
+			 
 			
 			//计算余额列
 			var lastRe=Number($("#init").val());

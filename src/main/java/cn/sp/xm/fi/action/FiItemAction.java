@@ -66,6 +66,10 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	 */
 	private MonthSum monthSum;
 	
+	private long pk;
+	private String name;
+	private String value;
+	
 
 	@Override
 	public FiItem getModel() {
@@ -134,6 +138,15 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 		return list();
 	}
 	
+	
+	public String updateSingleField() throws Exception {
+		
+		long id = pk;
+		String fieldName = name;
+		service.updateSingleField(id ,fieldName ,value);
+		
+		return null;
+	}
 	
 
 	@Override
@@ -215,6 +228,31 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 
 	public void setMonthStr(String monthStr) {
 		this.monthStr = monthStr;
+	}
+
+
+	public long getPk() {
+		return pk;
+	}
+
+	public void setPk(long pk) {
+		this.pk = pk;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	

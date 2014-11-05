@@ -140,5 +140,18 @@ public class MonthSumService implements IBaseService<MonthSum, Long> {
 			monthSum.setRest(monthSum.getRest()+re);
 		}
 	}
+	
+	/**
+	 * 更新随后的汇总
+	 * @param sum
+	 */
+	public void updateNexts(MonthSum sum) {
+		List<MonthSum> l = dao.findNexts(sum.getYear(),sum.getMonth());
+		for (MonthSum monthSum : l) {
+			logger.info("update {}",monthSum);
+			monthSum.recount();
+			dao.save(monthSum);
+		}
+	}
 
 }

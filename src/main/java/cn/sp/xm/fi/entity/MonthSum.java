@@ -1,5 +1,6 @@
 package cn.sp.xm.fi.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -83,6 +84,30 @@ public class MonthSum extends BaseEntity<Long>{
 		rest = rest +income2-output2;
 		
 	}
+	
+	@Transient
+	/**
+	 * 根据现有行项目重计算，收入、支持和余额
+	 * @param income2
+	 * @param output2
+	 */
+	public void recount() {
+		double gRest = getInit();
+		double gIn = 0;
+		double gOut = 0;
+		if (items!=null) {
+			for (FiItem item : items) {
+				double income= item.getIncome(); 
+				double output= item.getOutput();
+				gIn+=income;
+				gOut+=output;
+				gRest= gRest+income -output;
+			}
+		}
+		setIncome(gIn);
+		setOutput(gOut);
+		setRest(gRest);
+	}
 
 	public int getYear() {
 		return year;
@@ -150,6 +175,15 @@ public class MonthSum extends BaseEntity<Long>{
 			item.setRest(re);
 			init=re;
 		}
+	}
+
+	public void addItem(FiItem i) {
+		
+		if(items==null){
+			items = new ArrayList<FiItem>();
+		}
+		items.add(i);
+		
 	}
 
 }
