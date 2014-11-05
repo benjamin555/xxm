@@ -1,9 +1,10 @@
 package cn.sp.xm.fi.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -28,11 +29,11 @@ public class MonthSum extends BaseEntity<Long>{
 	private int year;
 	
 	private int month;
-	
+	@Column(columnDefinition="Decimal(10,2)")
 	private double income;
-	
+	@Column(columnDefinition="Decimal(10,2)")
 	private double output;
-	
+	@Column(columnDefinition="Decimal(10,2)")
 	private double rest;
 
 	@OneToOne(fetch=FetchType.LAZY)
@@ -42,7 +43,7 @@ public class MonthSum extends BaseEntity<Long>{
 	@OneToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY, mappedBy = "sum")
 	@Where(clause="is_Use='Y'")
 	@OrderBy(clause="dat asc  ")
-	private List<FiItem> items;
+	private Set<FiItem> items;
 
 
 
@@ -131,11 +132,13 @@ public class MonthSum extends BaseEntity<Long>{
 				+ rest + "]";
 	}
 
-	public List<FiItem> getItems() {
+	
+
+	public Set<FiItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<FiItem> items) {
+	public void setItems(Set<FiItem> items) {
 		this.items = items;
 	}
 
@@ -180,7 +183,7 @@ public class MonthSum extends BaseEntity<Long>{
 	public void addItem(FiItem i) {
 		
 		if(items==null){
-			items = new ArrayList<FiItem>();
+			items = new HashSet<FiItem>();
 		}
 		items.add(i);
 		

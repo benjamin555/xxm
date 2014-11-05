@@ -1,5 +1,6 @@
 package cn.sp.xm.fi.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,8 +28,9 @@ public class FiItem extends BaseEntity<Long>{
 	
 	private String description;
 	
+	@Column(columnDefinition="Decimal(10,2)")
 	private double income;
-	
+	@Column(columnDefinition="Decimal(10,2)")
 	private double output;
 	
 	

@@ -4,7 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,7 +54,7 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	@Autowired
 	private MonthSumService  monthSumService;
 	
-	private List<FiItem> items ;
+	private Set<FiItem> items ;
 	
 	/**
 	 * 期初值
@@ -172,14 +172,15 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 		this.service = service;
 	}
 
-	public List<FiItem> getItems() {
+
+
+	public Set<FiItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<FiItem> items) {
+	public void setItems(Set<FiItem> items) {
 		this.items = items;
 	}
-
 
 	public String getDefaultMonth() {
 		return monthStr;

@@ -2,10 +2,11 @@ package cn.sp.xm.fi.service;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
@@ -114,11 +115,11 @@ public class MonthSumService implements IBaseService<MonthSum, Long> {
 		
 		MonthSum sum = getById(id);
 		Map<String, Object> dateMap = new HashMap<String, Object>();
-		List<FiItem> items = sum.getItems();
+		Set<FiItem> items = sum.getItems();
 		sum.countItemsRest();
 		if (items == null) {
 			logger.info("items is null");
-			items = new ArrayList<FiItem>();
+			items = new HashSet<FiItem>();
 		}
 		dateMap.put("dataList", items);
 		dateMap.put("sum", sum);

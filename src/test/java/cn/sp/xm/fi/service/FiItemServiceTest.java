@@ -1,9 +1,10 @@
 package cn.sp.xm.fi.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -145,10 +146,10 @@ public class FiItemServiceTest {
 		sum = monthService.getById(sum.getId());
 
 		Map<String, Object> dateMap = new HashMap<String, Object>();
-		List<FiItem> items = sum.getItems();
+		Set<FiItem> items = sum.getItems();
 		if (items == null) {
 			logger.info("items is null");
-			items = new ArrayList<FiItem>();
+			items = new HashSet<FiItem>();
 		}
 		dateMap.put("dataList", items);
 		dateMap.put("sum", sum);
