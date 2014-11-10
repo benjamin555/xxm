@@ -5,7 +5,9 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,5 +109,23 @@ public class ServletUtils {
 		ret.put("msg", msg);
 		response.getWriter().write(JSONObject.fromObject(ret).toString());
 		
+	}
+
+	/**
+	 * 过滤空值
+	 * @param searchMap
+	 */
+	public static void filterEmpty(Map<String, String> searchMap) {
+		if (searchMap!=null) {
+			Set<String> keySet = searchMap.keySet();
+			for (Iterator<String> iterator = keySet.iterator(); iterator.hasNext();) {
+				String key = iterator.next();
+				String value = searchMap.get(key);
+				if (StringUtils.isEmpty(value)) {
+					iterator.remove();
+				}
+			}
+			
+		}
 	}
 }

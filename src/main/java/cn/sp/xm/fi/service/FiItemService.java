@@ -1,6 +1,7 @@
 package cn.sp.xm.fi.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,6 +126,10 @@ public class FiItemService implements IBaseService<FiItem,Long>{
 		
 		
 		
+	}
+
+	public List<FiItem> find(Map<String, String> searchMap) {
+		return fiItemDao.find(searchMap);
 	}
 
 	

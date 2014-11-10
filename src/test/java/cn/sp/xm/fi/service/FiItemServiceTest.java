@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -40,11 +39,6 @@ public class FiItemServiceTest {
 	private FiItemService service;
 	@Autowired
 	private MonthSumService monthService;
-
-	@Before
-	public void before() {
-
-	}
 
 	@Test
 	public void testSave() throws Exception {
@@ -204,6 +198,31 @@ public class FiItemServiceTest {
 		Assert.isTrue(sum.getRest() == 11300);
 		
 		
+		
 	}
+	
+	@Test
+	public void testSearch() throws Exception {
+		Map<String, String>searchMap = new HashMap<String, String>();
+		String description = "初始值";
+		searchMap.put("flt_i_and_eqS_description", description);
+		List<FiItem> ls = service.find(searchMap);
+		Assert.notEmpty(ls);
+		logger.info("ls:{}",ls);
+		
+		searchMap.clear();
+		searchMap.put("flt_i_and_geN_income", "5000");
+		ls = service.find(searchMap);
+		Assert.notEmpty(ls);
+		logger.info("ls:{}",ls);
+		
+		searchMap.clear();
+		searchMap.put("flt_i_and_geN_output", "130");
+		ls = service.find(searchMap);
+		Assert.notEmpty(ls);
+		logger.info("ls:{}",ls);
+		
+	}
+	
 
 }

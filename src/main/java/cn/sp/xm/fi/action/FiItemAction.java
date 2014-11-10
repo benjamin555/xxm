@@ -4,6 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +24,7 @@ import org.springframework.stereotype.Controller;
 
 import cn.sp.action.CrudActionSupport;
 import cn.sp.utils.DateUtils;
+import cn.sp.web.utils.ServletUtils;
 import cn.sp.xm.fi.entity.FiItem;
 import cn.sp.xm.fi.entity.MonthSum;
 import cn.sp.xm.fi.service.FiItemService;
@@ -41,7 +45,7 @@ import cn.sp.xm.fi.service.MonthSumService;
 public class FiItemAction extends CrudActionSupport<FiItem> {
 	private FiItem item;
 	
-	
+	private Map<String, String> searchMap ;
 	/**
 	 * 月份
 	 */
@@ -146,6 +150,17 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 		service.updateSingleField(id ,fieldName ,value);
 		
 		return null;
+	}
+	
+	public String search() throws Exception{
+		ServletUtils.filterEmpty(searchMap);
+		if (searchMap!=null&&!searchMap.isEmpty()) {
+			
+			List<FiItem> ls = service.find(searchMap);
+			items=new HashSet<FiItem>();
+			items.addAll(ls);
+		}
+		return "search";
 	}
 	
 
@@ -254,6 +269,14 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public Map<String, String> getSearchMap() {
+		return searchMap;
+	}
+
+	public void setSearchMap(Map<String, String> searchMap) {
+		this.searchMap = searchMap;
 	}
 
 	

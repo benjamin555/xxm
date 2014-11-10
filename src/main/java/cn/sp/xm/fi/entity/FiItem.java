@@ -111,6 +111,12 @@ public class FiItem extends BaseEntity<Long>{
 		this.rest = rest;
 	}
 
+	@Override
+	public String toString() {
+		return "FiItem [sum=" + sum.getId() + ", dat=" + dat + ", description=" + description + ", income=" + income
+				+ ", output=" + output + ", handler=" + handler + ", rest=" + rest + "]";
+	}
+
 
 	
 	

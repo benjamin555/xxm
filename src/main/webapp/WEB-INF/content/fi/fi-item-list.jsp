@@ -40,6 +40,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- /input-group -->
 				</div>
 				<!-- /.col-lg-6 -->
+				<div style="float: right; margin-right: 10%;">
+					<a href="fi/fi-item!search.action" class="btn btn-primary" >查询</a>
+				</div>
 			</div>
 			<!-- /.row -->
 		</form>
