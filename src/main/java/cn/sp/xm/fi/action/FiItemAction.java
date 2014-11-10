@@ -41,6 +41,7 @@ import cn.sp.xm.fi.service.MonthSumService;
 @Namespace("/fi")
 @ExceptionMappings({ @ExceptionMapping(exception = "java.lang.Exception", result = "exception") })
 @Results({ @Result(name = "exception", location = "/common/error.jsp") 
+			,@Result(name="rList",type="redirect",location="fi-item!list.action",params={"monthStr","${monthStr}"})
 })
 public class FiItemAction extends CrudActionSupport<FiItem> {
 	private FiItem item;
@@ -120,7 +121,7 @@ public class FiItemAction extends CrudActionSupport<FiItem> {
 	@Override
 	public String save() throws Exception {
 		service.save(item);
-		return list() ;
+		return "rList" ;
 	}
 
 	@Override
