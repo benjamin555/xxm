@@ -1,3 +1,2 @@
-The OpenShift `jbossews` cartridge documentation can be found at:
+中秋猜谜小游戏。建议使用Chrome浏览器浏览。
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#tomcat
